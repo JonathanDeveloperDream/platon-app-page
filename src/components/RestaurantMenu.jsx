@@ -5,9 +5,20 @@ const RestaurantMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [darkMode, setDarkMode] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // URL de la imagen de fondo para el hero - Puedes cambiarla por la foto de tu local
   const heroBackgroundImage = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600';
+
+  // Detectar scroll para cambiar tamaño del botón
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Bloquear scroll cuando el modal está abierto
   useEffect(() => {
@@ -249,13 +260,19 @@ const RestaurantMenu = () => {
       {/* Botón de tema */}
       <button
         onClick={() => setDarkMode(!darkMode)}
-        className={`fixed top-6 right-6 z-30 p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+        className={`fixed z-50 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+          isScrolled ? 'top-3 right-3 p-2' : 'top-6 right-6 p-3'
+        } ${
           darkMode 
             ? 'bg-neutral-800 text-amber-300 hover:bg-neutral-700' 
             : 'bg-white text-amber-600 hover:bg-stone-100'
         }`}
       >
-        {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+        {darkMode ? (
+          <Sun className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'}`} />
+        ) : (
+          <Moon className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'}`} />
+        )}
       </button>
 
       {/* Modal de detalles del platillo */}
@@ -397,7 +414,7 @@ const RestaurantMenu = () => {
       )}
 
       {/* Sección Hero */}
-      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+      <div className="relative h-[70vh] md:h-screen flex items-center justify-center overflow-hidden">
         {/* Imagen de fondo */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -420,28 +437,28 @@ const RestaurantMenu = () => {
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2zm0-2v-2 2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
         
-        <div className="relative z-10 text-center px-4 space-y-4">
-          <ChefHat className={`w-20 h-20 mx-auto ${
+        <div className="relative z-10 text-center px-4 space-y-3 md:space-y-4">
+          <ChefHat className={`w-16 h-16 md:w-20 md:h-20 mx-auto ${
             darkMode ? 'text-stone-300' : 'text-stone-700'
           }`} />
-          <h1 className={`text-7xl md:text-8xl font-serif font-light tracking-wide ${
+          <h1 className={`text-5xl md:text-7xl lg:text-8xl font-serif font-light tracking-wide ${
             darkMode 
               ? 'text-stone-100' 
               : 'text-stone-800'
           }`}>
             Nombre del negocio
           </h1>
-          <div className={`w-24 h-0.5 mx-auto ${
+          <div className={`w-20 md:w-24 h-0.5 mx-auto ${
             darkMode ? 'bg-stone-500' : 'bg-stone-400'
           }`}></div>
-          <p className={`text-lg md:text-xl font-light max-w-2xl mx-auto ${
+          <p className={`text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto ${
             darkMode ? 'text-stone-400' : 'text-stone-600'
           }`}>
             Este es un eslogan personalizado para el negocio
           </p>
         </div>
 
-        <div className={`absolute bottom-0 left-0 right-0 h-32 ${
+        <div className={`absolute bottom-0 left-0 right-0 h-24 md:h-32 ${
           darkMode 
             ? 'bg-gradient-to-t from-neutral-900 to-transparent' 
             : 'bg-gradient-to-t from-stone-50 to-transparent'
@@ -588,17 +605,17 @@ const RestaurantMenu = () => {
           <p className={`text-lg font-serif ${
             darkMode ? 'text-stone-300' : 'text-stone-700'
           }`}>
-            Nombre del negocio
+            Sabor Divino
           </p>
           <p className={`text-sm ${
             darkMode ? 'text-stone-500' : 'text-stone-500'
           }`}>
-            Eslogan del negocio
+            Donde cada platillo es una obra maestra
           </p>
           <p className={`text-sm ${
             darkMode ? 'text-stone-600' : 'text-stone-400'
           }`}>
-            © 2026 Nombre del negocio. Todos los derechos reservados.
+            © 2026 Sabor Divino. Todos los derechos reservados.
           </p>
         </div>
       </footer>
