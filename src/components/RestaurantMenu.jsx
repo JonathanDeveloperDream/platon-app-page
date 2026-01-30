@@ -324,32 +324,9 @@ const RestaurantMenu = () => {
                   }`}>
                     {selectedItem.name}
                   </h2>
-                  
-                  {/* Calificación */}
-                  <div className={`flex items-center gap-2 mt-2 ${
-                    darkMode ? 'text-stone-400' : 'text-stone-600'
-                  }`}>
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-5 h-5 ${
-                          i < Math.floor(selectedItem.rating)
-                            ? darkMode 
-                              ? 'fill-stone-400 text-stone-400' 
-                              : 'fill-stone-600 text-stone-600'
-                            : darkMode 
-                              ? 'text-neutral-700' 
-                              : 'text-stone-300'
-                        }`}
-                      />
-                    ))}
-                    <span className="ml-1 text-lg font-medium">
-                      {selectedItem.rating}
-                    </span>
-                  </div>
                 </div>
 
-                <div className={`px-6 py-3 rounded-full font-bold text-2xl shadow-lg ${
+                <div className={`px-4 py-3 rounded-full font-bold text-1xl shadow-lg ${
                   darkMode 
                     ? 'bg-stone-100 text-neutral-900' 
                     : 'bg-neutral-900 text-stone-50'
@@ -400,14 +377,14 @@ const RestaurantMenu = () => {
                 </div>
               </div>
 
-              {/* Botón de ordenar */}
+              {/* Botón de ordenar
               <button className={`w-full font-semibold text-lg py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg ${
                 darkMode 
                   ? 'bg-stone-100 text-neutral-900 hover:bg-stone-200' 
                   : 'bg-neutral-900 text-stone-50 hover:bg-neutral-800'
               }`}>
                 Ordenar Ahora
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -605,17 +582,17 @@ const RestaurantMenu = () => {
           <p className={`text-lg font-serif ${
             darkMode ? 'text-stone-300' : 'text-stone-700'
           }`}>
-            Sabor Divino
+            Nombre del negocio
           </p>
           <p className={`text-sm ${
             darkMode ? 'text-stone-500' : 'text-stone-500'
           }`}>
-            Donde cada platillo es una obra maestra
+            Eslogan del negocio
           </p>
           <p className={`text-sm ${
             darkMode ? 'text-stone-600' : 'text-stone-400'
           }`}>
-            © 2026 Sabor Divino. Todos los derechos reservados.
+            © {new Date().getFullYear()} nombre del negocio. Todos los derechos reservados.
           </p>
         </div>
       </footer>
