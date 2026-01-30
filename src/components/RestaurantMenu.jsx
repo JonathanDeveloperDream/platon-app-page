@@ -479,7 +479,7 @@ const RestaurantMenu = () => {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
+                  className={`flex items-center gap-2 px-3 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
                     selectedCategory === category.id
                       ? darkMode 
                         ? 'bg-stone-100 text-neutral-900 shadow-lg'
